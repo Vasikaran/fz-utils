@@ -1,0 +1,32 @@
+{
+  "name": "fz-utils",
+  "version": "0.0.1",
+  "description": "for utilized methods",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "prepublish": "npm run build"
+  },
+  "babel": {
+    "presets": [
+       "es2015"
+     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vasikaran/fz-utils.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "Vasikaran S <vasikaran.25@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vasikaran/fz-utils/issues"
+  },
+  "homepage": "https://github.com/Vasikaran/fz-utils#readme",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
