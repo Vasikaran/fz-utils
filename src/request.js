@@ -5,7 +5,7 @@ import { isObject, isArray } from './common/utils';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-let callback = (resolve, method, payload)=>{
+let callback = (resolve)=>{
     return (res)=>{
         res.setEncoding('utf8');
         let str = '';
@@ -31,26 +31,22 @@ let callback = (resolve, method, payload)=>{
 
 let request = (options)=>{
     return new Promise((resolve, reject)=>{
-        let { protocol, hostname, path, port, pathname } = url.parse(options.url);
+        let { protocol, hostname, path, port } = url.parse(options.url);
         let { method = 'GET', headers = {}, payload = {} } = options;
         let newOptions = {
             host: hostname,
             port: port,
-            path: pathname,
+            path: path,
             method: method,
             headers: headers
         };
         let req;
 
         if(protocol === 'https:'){
-            req = https.request(newOptions, callback(resolve)).end();
+            req = https.request(newOptions, callback(resolve));
         }else if (protocol === 'http:'){
-            req = http.request(newOptions, callback(resolve)).end();
+            req = http.request(newOptions, callback(resolve));
         }
-
-        req.on('error', (err)=>{
-            process.stdout.write(err);
-        })
 
         if (method.toUpperCase() === 'POST'){
             if(isObject(payload) || isArray(payload)){
@@ -58,6 +54,7 @@ let request = (options)=>{
             }
             req.write(payload);
         }
+        req.end();
     })
 }
 

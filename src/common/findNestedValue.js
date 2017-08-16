@@ -1,4 +1,4 @@
-import { isObject, stringHasValue, hasValue, getValueFromObject } from '../utils/utils';
+import { isObject, stringHasValue, hasValue, getValueFromObject } from './utils';
 import errorHandling from './errorHandling';
 
 function findNestedValue(object, keyPath, option){
